@@ -1,0 +1,609 @@
+{
+  "info": {
+    "name": "AutoPlus API - FIXED",
+    "description": "Complete API collection for AutoPlus - Auto Parts Management System - All POST endpoints fixed",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Inventory",
+      "item": [
+        {
+          "name": "Get All Inventory",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/inventory",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "inventory"]
+            }
+          }
+        },
+        {
+          "name": "Get Inventory by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/inventory/INV001",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "inventory", "INV001"]
+            }
+          }
+        },
+        {
+          "name": "Create Inventory",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accessoryId\": \"ACC001\",\n  \"quantity\": 100,\n  \"location\": \"Warehouse A\",\n  \"lastUpdate\": \"2025-11-20\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/inventory",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "inventory"]
+            }
+          }
+        },
+        {
+          "name": "Update Inventory",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accessoryId\": \"ACC001\",\n  \"quantity\": 200,\n  \"location\": \"Warehouse B\",\n  \"lastUpdate\": \"2025-11-20\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/inventory/INV001",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "inventory", "INV001"]
+            }
+          }
+        },
+        {
+          "name": "Add Stock",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "amount",
+                  "value": "50"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/inventory/INV001/add-stock",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "inventory", "INV001", "add-stock"]
+            }
+          }
+        },
+        {
+          "name": "Remove Stock",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "amount",
+                  "value": "25"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/inventory/INV001/remove-stock",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "inventory", "INV001", "remove-stock"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Orders",
+      "item": [
+        {
+          "name": "Get All Orders",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/orders",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "orders"]
+            }
+          }
+        },
+        {
+          "name": "Get Order by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/orders/ORD001",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "orders", "ORD001"]
+            }
+          }
+        },
+        {
+          "name": "Create Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"providerId\": \"PROV001\",\n  \"accessoryId\": \"ACC001\",\n  \"quantity\": 50,\n  \"totalCost\": 4499.50,\n  \"orderDate\": \"2025-11-20\",\n  \"status\": \"Pending\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/orders",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "orders"]
+            }
+          }
+        },
+        {
+          "name": "Update Order",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"providerId\": \"PROV001\",\n  \"accessoryId\": \"ACC001\",\n  \"quantity\": 75,\n  \"totalCost\": 6749.25,\n  \"orderDate\": \"2025-11-20\",\n  \"status\": \"In Transit\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/orders/ORD001",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "orders", "ORD001"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Shopping Carts",
+      "item": [
+        {
+          "name": "Get Cart by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/carts/CART001",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "carts", "CART001"]
+            }
+          }
+        },
+        {
+          "name": "Create Cart",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"clientId\": \"CLI001\",\n  \"creationDate\": \"2025-11-20\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/carts",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "carts"]
+            }
+          }
+        },
+        {
+          "name": "Create Cart from Form",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "clientId",
+                  "value": "CLI002"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/carts",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "carts"]
+            }
+          }
+        },
+        {
+          "name": "Add Item to Cart",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "accessoryId",
+                  "value": "ACC001"
+                },
+                {
+                  "key": "quantity",
+                  "value": "2"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/carts/CART001/items",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "carts", "CART001", "items"]
+            }
+          }
+        },
+        {
+          "name": "Remove Item from Cart",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/carts/CART001/items/ACC001",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "carts", "CART001", "items", "ACC001"]
+            }
+          }
+        },
+        {
+          "name": "Clear Cart",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/carts/CART001/clear",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "carts", "CART001", "clear"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sales",
+      "item": [
+        {
+          "name": "Get All Sales",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/sales",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "sales"]
+            }
+          }
+        },
+        {
+          "name": "Get Sale by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/sales/SALE001",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "sales", "SALE001"]
+            }
+          }
+        },
+        {
+          "name": "Create Sale",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"client\": {\n    \"id\": \"CLI001\",\n    \"name\": \"Juan Pérez\",\n    \"email\": \"juan.perez@email.com\",\n    \"phone\": \"555-0001\"\n  },\n  \"seller\": {\n    \"id\": \"SEL001\",\n    \"name\": \"AutoPlus Main Store\",\n    \"location\": \"Bogotá\"\n  },\n  \"items\": [\n    {\n      \"accessory\": {\n        \"id\": \"ACC001\",\n        \"name\": \"Tire Michelin\",\n        \"price\": 89.99\n      },\n      \"quantity\": 2,\n      \"unitPrice\": 89.99\n    }\n  ],\n  \"totalAmount\": 179.98,\n  \"saleDate\": \"2025-11-20\",\n  \"status\": \"Completed\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/sales",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "sales"]
+            }
+          }
+        },
+        {
+          "name": "Update Sale",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"client\": {\n    \"id\": \"CLI001\",\n    \"name\": \"Juan Pérez\",\n    \"email\": \"juan.perez@email.com\",\n    \"phone\": \"555-0001\"\n  },\n  \"seller\": {\n    \"id\": \"SEL001\",\n    \"name\": \"AutoPlus Main Store\",\n    \"location\": \"Bogotá\"\n  },\n  \"items\": [\n    {\n      \"accessory\": {\n        \"id\": \"ACC001\",\n        \"name\": \"Tire Michelin\",\n        \"price\": 89.99\n      },\n      \"quantity\": 3,\n      \"unitPrice\": 89.99\n    }\n  ],\n  \"totalAmount\": 269.97,\n  \"saleDate\": \"2025-11-20\",\n  \"status\": \"Completed\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/sales/SALE001",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "sales", "SALE001"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Invoices",
+      "item": [
+        {
+          "name": "Get All Invoices",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/invoices",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "invoices"]
+            }
+          }
+        },
+        {
+          "name": "Get Invoice by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/invoices/INV001",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "invoices", "INV001"]
+            }
+          }
+        },
+        {
+          "name": "Create Invoice",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sale\": {\n    \"id\": \"SALE001\",\n    \"client\": {\n      \"id\": \"CLI001\",\n      \"name\": \"Juan Pérez\",\n      \"email\": \"juan.perez@email.com\",\n      \"phone\": \"555-0001\"\n    },\n    \"seller\": {\n      \"id\": \"SEL001\",\n      \"name\": \"AutoPlus Main Store\",\n      \"location\": \"Bogotá\"\n    },\n    \"items\": [],\n    \"totalAmount\": 179.98,\n    \"saleDate\": \"2025-11-20\",\n    \"status\": \"Completed\"\n  },\n  \"subtotal\": 179.98,\n  \"tax\": 0.0,\n  \"total\": 179.98,\n  \"invoiceDate\": \"2025-11-20\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/invoices",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "invoices"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Warranties",
+      "item": [
+        {
+          "name": "Get All Warranties",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/warranties",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "warranties"]
+            }
+          }
+        },
+        {
+          "name": "Get Warranty by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:8080/api/warranties/WAR001",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "warranties", "WAR001"]
+            }
+          }
+        },
+        {
+          "name": "Create Warranty",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"accessoryId\": \"ACC001\",\n  \"months\": 24,\n  \"description\": \"Full coverage tire warranty\",\n  \"startDate\": \"2025-11-20\",\n  \"endDate\": \"2027-11-20\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/warranties",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["api", "warranties"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
