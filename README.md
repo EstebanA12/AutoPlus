@@ -1,5 +1,22 @@
 # AutoPlus - API REST de Gestión de Tienda de Accesorios Automotrices
 
+## 🔄 ¡REFACTORIZACIÓN COMPLETADA! 🔄
+
+**Fecha:** 2024-11-13
+
+Se ha completado una refactorización integral del modelo para implementar **relaciones de objetos reales** en lugar de solo IDs string. 
+
+**Cambios principales:**
+- ✅ 7 entidades refactorizadas
+- ✅ 1 nueva entidad creada (SaleItem)
+- ✅ Relaciones de objetos con validación automática
+- ✅ Métodos de negocio encapsulados
+- ✅ 13 documentos de referencia
+
+**Comienza aquí:** [START_HERE.md](./START_HERE.md)
+
+---
+
 ## Descripción del Proyecto
 
 AutoPlus es una API REST desarrollada en **Java 23+** con **Spring Boot** y **Lombok** para la gestión completa de una tienda de accesorios automotrices. El sistema implementa principios sólidos de Programación Orientada a Objetos (POO) y persiste datos en archivos **CSV**.
