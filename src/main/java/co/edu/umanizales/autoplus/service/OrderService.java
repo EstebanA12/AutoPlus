@@ -3,6 +3,8 @@ package co.edu.umanizales.autoplus.service;
 import co.edu.umanizales.autoplus.model.abstracts.Accessory;
 import co.edu.umanizales.autoplus.model.abstracts.Provider;
 import co.edu.umanizales.autoplus.model.entities.Order;
+import co.edu.umanizales.autoplus.model.entities.LocalProvider;
+import co.edu.umanizales.autoplus.model.entities.TechnologicalAccessory;
 import co.edu.umanizales.autoplus.model.dto.OrderReportDTO;
 import org.springframework.stereotype.Service;
 
@@ -52,14 +54,28 @@ public class OrderService {
             Order order = new Order();
             order.fromCsv(line);
             String[] parts = line.split(",");
-            if (parts.length >= 3) {
+            if (parts.length >= 7) {
+                // Intenta cargar el proveedor
                 Provider provider = providerService.findById(parts[1]);
-                Accessory accessory = accessoryService.findById(parts[2]);
-                if (provider != null && accessory != null) {
-                    order.setProvider(provider);
-                    order.setAccessory(accessory);
-                    orders.add(order);
+                if (provider == null) {
+                    // Si no existe, crea un proveedor dummy con el ID
+                    provider = new LocalProvider();
+                    provider.setId(parts[1]);
+                    provider.setName("Proveedor " + parts[1]);
                 }
+                
+                // Intenta cargar el accesorio
+                Accessory accessory = accessoryService.findById(parts[2]);
+                if (accessory == null) {
+                    // Si no existe, crea un accesorio dummy con el ID
+                    accessory = new TechnologicalAccessory();
+                    accessory.setId(parts[2]);
+                    accessory.setName("Accesorio " + parts[2]);
+                }
+                
+                order.setProvider(provider);
+                order.setAccessory(accessory);
+                orders.add(order);
             }
         }
         return orders;

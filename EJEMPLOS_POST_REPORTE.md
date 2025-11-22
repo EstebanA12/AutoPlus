@@ -1,8 +1,15 @@
 # Ejemplos POST - Reporte de Pedidos
 
-## Endpoint
+## Endpoints Disponibles
+
+### Opción 1: Reporte en JSON
 ```
 POST http://localhost:8080/api/orders/report/generate
+```
+
+### Opción 2: Reporte en HTML (Tabla Visual) ⭐ RECOMENDADO
+```
+POST http://localhost:8080/api/orders/report/generate-html
 ```
 
 ---
@@ -145,7 +152,8 @@ POST http://localhost:8080/api/orders/report/generate
 
 ### Paso 3: Configura la solicitud
 - **Método:** POST
-- **URL:** `http://localhost:8080/api/orders/report/generate`
+- **URL (Opción 1 - JSON):** `http://localhost:8080/api/orders/report/generate`
+- **URL (Opción 2 - HTML):** `http://localhost:8080/api/orders/report/generate-html`
 - **Headers:** 
   - `Content-Type: application/json`
 
@@ -157,6 +165,21 @@ POST http://localhost:8080/api/orders/report/generate
 
 ### Paso 5: Envía la solicitud
 - Click en "Send"
+
+### Paso 6: Ver la Respuesta
+- **Si usas `/report/generate`:** Verás el JSON en la pestaña "Body"
+- **Si usas `/report/generate-html`:** Haz click en "Preview" para ver la tabla HTML formateada
+
+---
+
+## 🎯 Recomendación
+
+**Usa `/report/generate-html`** para ver una tabla visual bonita con:
+- ✅ Período del reporte
+- ✅ Resumen con totales
+- ✅ Tabla con todos los pedidos
+- ✅ Colores por estado
+- ✅ Formato profesional
 
 ---
 
