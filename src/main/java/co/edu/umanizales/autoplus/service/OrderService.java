@@ -3,8 +3,11 @@ package co.edu.umanizales.autoplus.service;
 import co.edu.umanizales.autoplus.model.abstracts.Accessory;
 import co.edu.umanizales.autoplus.model.abstracts.Provider;
 import co.edu.umanizales.autoplus.model.entities.Order;
+import co.edu.umanizales.autoplus.model.dto.OrderReportDTO;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -77,6 +80,53 @@ public class OrderService {
         }
         csvService.updateLine("orders.csv", order.getId(), order.toCsv());
         return order;
+    }
+
+    public OrderReportDTO generateReport(String fechaInicio, String fechaFin) {
+        List<Order> allOrders = findAll();
+        
+        LocalDate startDate = LocalDate.parse(fechaInicio);
+        LocalDate endDate = LocalDate.parse(fechaFin);
+        
+        List<OrderReportDTO.Orden> filteredOrders = new ArrayList<>();
+        double totalValue = 0;
+        
+        for (Order order : allOrders) {
+            LocalDate orderDate = LocalDate.parse(order.getOrderDate());
+            
+            if (!orderDate.isBefore(startDate) && !orderDate.isAfter(endDate)) {
+                OrderReportDTO.Orden reportOrder = new OrderReportDTO.Orden();
+                reportOrder.setId(order.getId());
+                reportOrder.setProveedor(order.getProviderId());
+                reportOrder.setValor_total(order.getTotalCost());
+                reportOrder.setFecha(order.getOrderDate());
+                reportOrder.setEstado(order.getStatus());
+                
+                filteredOrders.add(reportOrder);
+                totalValue += order.getTotalCost();
+            }
+        }
+        
+        long daysBetween = ChronoUnit.DAYS.between(startDate, endDate) + 1;
+        
+        OrderReportDTO.Periodo periodo = new OrderReportDTO.Periodo();
+        periodo.setFecha_inicio(fechaInicio);
+        periodo.setFecha_fin(fechaFin);
+        periodo.setDias_cubiertos((int) daysBetween);
+        
+        OrderReportDTO.Resumen resumen = new OrderReportDTO.Resumen();
+        resumen.setTotal_pedidos(filteredOrders.size());
+        resumen.setValor_total(totalValue);
+        
+        OrderReportDTO.ReportePeticiones reportePeticiones = new OrderReportDTO.ReportePeticiones();
+        reportePeticiones.setPeriodo(periodo);
+        reportePeticiones.setResumen(resumen);
+        reportePeticiones.setOrdenes(filteredOrders);
+        
+        OrderReportDTO report = new OrderReportDTO();
+        report.setReporte_peticiones(reportePeticiones);
+        
+        return report;
     }
 
     private String generateId() { return UUID.randomUUID().toString(); }

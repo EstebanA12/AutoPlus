@@ -1,6 +1,7 @@
 package co.edu.umanizales.autoplus.controller;
 
 import co.edu.umanizales.autoplus.model.entities.Order;
+import co.edu.umanizales.autoplus.model.dto.OrderReportDTO;
 import co.edu.umanizales.autoplus.service.OrderService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.ArrayList;
 import com.fasterxml.jackson.databind.JsonNode;
 import co.edu.umanizales.autoplus.service.ProviderService;
 import co.edu.umanizales.autoplus.service.AccessoryService;
@@ -123,5 +127,43 @@ public class OrderController {
 
         Order updated = orderService.update(existing);
         return ResponseEntity.ok(updated);
+    }
+
+    @GetMapping("/report/orders")
+    public ResponseEntity<?> getOrderReport() {
+        List<Order> orders = orderService.findAll();
+        List<Map<String, Object>> report = new ArrayList<>();
+        
+        for (Order order : orders) {
+            Map<String, Object> row = new HashMap<>();
+            row.put("id", order.getId());
+            row.put("fecha", order.getOrderDate());
+            row.put("estado", order.getStatus());
+            row.put("valor", order.getTotalCost());
+            report.add(row);
+        }
+        
+        return ResponseEntity.ok(report);
+    }
+
+    @PostMapping("/report/generate")
+    public ResponseEntity<?> generateReport(@RequestBody Map<String, String> request) {
+        try {
+            String fechaInicio = request.get("fecha_inicio");
+            String fechaFin = request.get("fecha_fin");
+            
+            if (fechaInicio == null || fechaInicio.isBlank()) {
+                return ResponseEntity.badRequest().body("fecha_inicio es requerida");
+            }
+            if (fechaFin == null || fechaFin.isBlank()) {
+                return ResponseEntity.badRequest().body("fecha_fin es requerida");
+            }
+            
+            OrderReportDTO report = orderService.generateReport(fechaInicio, fechaFin);
+            return ResponseEntity.ok(report);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Error generando reporte: " + e.getMessage());
+        }
     }
 }
